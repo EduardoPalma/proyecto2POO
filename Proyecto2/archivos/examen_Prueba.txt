@@ -1,0 +1,2 @@
+PTF,la capital de chiles es santiago,4,true
+PC,la capital de la region de coquimbo,5,la serena

@@ -2,6 +2,11 @@ package interfaz;
 
 import javax.swing.*;
 
+import controlador.HacerExamen;
+import controlador.InicioSesion;
+import controlador.RegistroUsuario;
+import modelo.Exam;
+
 public class InterfazProyecto extends JFrame {
 	
 	private PanelIntroduccion panelIntro;
@@ -10,15 +15,19 @@ public class InterfazProyecto extends JFrame {
 	private PanelEstadisticas panelEsta;
 	private PanelAdmin panelAdmin;
 	private JTabbedPane pesta;
+	private Exam datos;
 	
 	private static final long serialVersionUID = 1L;
 
-	public InterfazProyecto(){
+	public InterfazProyecto(Exam datos){
+		this.datos = datos;
 		setTitle("Proyecto 2");
-		setSize(800,600);
+		setSize(600,400);
 		setLocationRelativeTo(this);
+		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		iniciarPestañas();
+		eventos();
 		setVisible(true);
 	}
 	
@@ -26,7 +35,7 @@ public class InterfazProyecto extends JFrame {
 		pesta = new JTabbedPane();
 		panelIntro = new PanelIntroduccion();
 		panelRegistro = new PanelRegistro();
-		panelExamen = new PanelExamen();
+		panelExamen = new PanelExamen(datos.getNamExam());
 		panelEsta = new PanelEstadisticas();
 		panelAdmin = new PanelAdmin();
 		
@@ -35,8 +44,24 @@ public class InterfazProyecto extends JFrame {
 		pesta.add("Examenes",panelExamen);
 		pesta.add("Estadisticas de Examenes",panelEsta);
 		pesta.add("Admin",panelAdmin);
-		
 		add(pesta);
+		
+		//pesta.setEnabledAt(2, false);
+		//pesta.setEnabledAt(3, false);
+		pesta.setEnabledAt(4, false);
+		
+	}
+	
+	private void eventos() {
+		RegistroUsuario registroUsuario = new RegistroUsuario(panelRegistro,datos);
+		panelRegistro.getRegistro().addActionListener(registroUsuario);
+		InicioSesion inicioSesion = new InicioSesion(panelIntro,datos,pesta);
+		panelIntro.getBottonIniciarSesion().addActionListener(inicioSesion);
+		HacerExamen hacerExamen = new HacerExamen(panelExamen,datos);
+		panelExamen.getHacerExamen().addActionListener(hacerExamen);
+		panelExamen.getPanelExamen().getSiguiente().addActionListener(hacerExamen);
+		panelExamen.getPanelExamen().getAnt().addActionListener(hacerExamen);
+		panelExamen.getFinalizarExamen().addActionListener(hacerExamen);
 		
 	}
 }

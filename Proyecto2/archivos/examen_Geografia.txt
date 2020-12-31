@@ -1,0 +1,5 @@
+PSM,capital de la region de coquimbo,5,2,6,La serena,illapel,coquimbo,salamnca,vicuña,ovalle
+PSM,provincias de la region de coquimbo,20,0,3,elqui;limari;choapa,elqui;huasco;rio del carmen,limari;elqui;conbarbala
+PTF,Capital de chile es Valparaiso,5,false
+PTF,pais que se encuentra al norte de chile es Peru ,6,true
+PC,cantidad de Regiones de chile es ,4,16
