@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import modelo.Exam;
+
 
 public class PanelExamen extends JPanel {
 	private JComboBox<String> pruebas;
@@ -51,6 +53,13 @@ public class PanelExamen extends JPanel {
 	private void panelExamen() {
 		panelExamen = new PanelRealizarExamen();
 		add(panelExamen);
+	}
+	
+	public void actualizar(Exam datos) {
+		this.pruebas.removeAllItems();
+		for(int i=0;i<datos.getNamExam().size();i++) {
+			this.pruebas.addItem(datos.getNamExam().get(i));
+		}
 	}
 
 	public JComboBox<String> getPruebas() {

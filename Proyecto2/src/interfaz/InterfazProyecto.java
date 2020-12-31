@@ -5,6 +5,7 @@ import javax.swing.*;
 import controlador.HacerExamen;
 import controlador.InicioSesion;
 import controlador.RegistroUsuario;
+import controlador.SeleccionAdmin;
 import modelo.Exam;
 
 public class InterfazProyecto extends JFrame {
@@ -37,7 +38,7 @@ public class InterfazProyecto extends JFrame {
 		panelRegistro = new PanelRegistro();
 		panelExamen = new PanelExamen(datos.getNamExam());
 		panelEsta = new PanelEstadisticas();
-		panelAdmin = new PanelAdmin();
+		panelAdmin = new PanelAdmin(datos,panelExamen);
 		
 		pesta.add("Intrucciones",panelIntro);
 		pesta.add("Registro Usuario",panelRegistro);
@@ -48,7 +49,7 @@ public class InterfazProyecto extends JFrame {
 		
 		//pesta.setEnabledAt(2, false);
 		//pesta.setEnabledAt(3, false);
-		pesta.setEnabledAt(4, false);
+		//pesta.setEnabledAt(4, false);
 		
 	}
 	
@@ -62,6 +63,11 @@ public class InterfazProyecto extends JFrame {
 		panelExamen.getPanelExamen().getSiguiente().addActionListener(hacerExamen);
 		panelExamen.getPanelExamen().getAnt().addActionListener(hacerExamen);
 		panelExamen.getFinalizarExamen().addActionListener(hacerExamen);
+		
+		SeleccionAdmin seleccionAdmin = new SeleccionAdmin(panelAdmin);
+		panelAdmin.getEliminarExamen().addActionListener(seleccionAdmin);
+		panelAdmin.getCrearExamen().addActionListener(seleccionAdmin);
+		panelAdmin.getGestionarUsuarios().addActionListener(seleccionAdmin);
 		
 	}
 }
