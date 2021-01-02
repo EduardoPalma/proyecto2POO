@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -53,6 +54,13 @@ public class PanelEliminarExamen extends JPanel implements ActionListener {
 			this.examenes.addItem(datos.getNamExam().get(i));
 		}
 	}
+	
+	public void actualizar() {
+		this.examenes.removeAllItems();
+		for(int i=0;i<datos.getNamExam().size();i++) {
+			this.examenes.addItem(datos.getNamExam().get(i));
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -60,7 +68,13 @@ public class PanelEliminarExamen extends JPanel implements ActionListener {
 		if(resp == 0) {
 			int indice = this.examenes.getSelectedIndex();
 			this.examenes.removeAllItems();
-			this.datos.getNamExam().remove(indice);
+			try {
+				this.datos.eliminarExamen(indice);
+				JOptionPane.showMessageDialog(this, "¡¡¡ Examen a sido Eliminado !!!");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			panelExamen.actualizar(datos);
 			cargarExamenes();
 			

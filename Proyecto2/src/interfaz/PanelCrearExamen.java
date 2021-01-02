@@ -13,9 +13,11 @@ public class PanelCrearExamen extends JPanel implements ActionListener{
 	private JTextField textoNombreExamen;
 	private JLabel nombreExamen,numeroPreguntas;
 	private int cantidadPregunta;
+	private PanelAdmin panelAdmin;
 	
 	
-	public PanelCrearExamen() {
+	public PanelCrearExamen(PanelAdmin panelAdmin) {
+		this.panelAdmin = panelAdmin;
 		this.cantidadPregunta = 0;
 		setLayout(null);
 		this.setBounds(200, 5 , 360, 325);
@@ -70,7 +72,13 @@ public class PanelCrearExamen extends JPanel implements ActionListener{
 	}
 	
 	public void visible() {
+		this.textoNombreExamen.setText(null);
 		this.setVisible(true);
+		this.cantidadPreguntas.setVisible(true);
+		this.crearExamen.setVisible(true);
+		this.nombreExamen.setVisible(true);
+		this.textoNombreExamen.setVisible(true);
+		this.numeroPreguntas.setVisible(true);
 	}
 	
 	public void noVisible() {
@@ -83,8 +91,77 @@ public class PanelCrearExamen extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		noVisible();
-		this.panelPreguntas.visible();
+		if(this.textoNombreExamen.getText() == null || this.textoNombreExamen.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "¡¡Nombre De El Examen vacio!!!","CUIDADO!!",JOptionPane.WARNING_MESSAGE);
+		}else {
+			noVisible();
+			this.panelPreguntas.visible();
+			this.cantidadPregunta = cantidadPreguntas.getSelectedIndex()+1;
+		}
+	}
+
+	public JComboBox<String> getCantidadPreguntas() {
+		return cantidadPreguntas;
+	}
+
+	public void setCantidadPreguntas(JComboBox<String> cantidadPreguntas) {
+		this.cantidadPreguntas = cantidadPreguntas;
+	}
+
+	public JButton getCrearExamen() {
+		return crearExamen;
+	}
+
+	public void setCrearExamen(JButton crearExamen) {
+		this.crearExamen = crearExamen;
+	}
+
+	public PanelPreguntas getPanelPreguntas() {
+		return panelPreguntas;
+	}
+
+	public void setPanelPreguntas(PanelPreguntas panelPreguntas) {
+		this.panelPreguntas = panelPreguntas;
+	}
+
+	public JTextField getTextoNombreExamen() {
+		return textoNombreExamen;
+	}
+
+	public void setTextoNombreExamen(JTextField textoNombreExamen) {
+		this.textoNombreExamen = textoNombreExamen;
+	}
+
+	public JLabel getNombreExamen() {
+		return nombreExamen;
+	}
+
+	public void setNombreExamen(JLabel nombreExamen) {
+		this.nombreExamen = nombreExamen;
+	}
+
+	public JLabel getNumeroPreguntas() {
+		return numeroPreguntas;
+	}
+
+	public void setNumeroPreguntas(JLabel numeroPreguntas) {
+		this.numeroPreguntas = numeroPreguntas;
+	}
+
+	public int getCantidadPregunta() {
+		return cantidadPregunta;
+	}
+
+	public void setCantidadPregunta(int cantidadPregunta) {
+		this.cantidadPregunta = cantidadPregunta;
+	}
+
+	public PanelAdmin getPanelAdmin() {
+		return panelAdmin;
+	}
+
+	public void setPanelAdmin(PanelAdmin panelAdmin) {
+		this.panelAdmin = panelAdmin;
 	}
 	
 	

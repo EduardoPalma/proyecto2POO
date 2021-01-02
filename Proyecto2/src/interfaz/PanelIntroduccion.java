@@ -45,8 +45,10 @@ public class PanelIntroduccion extends JPanel {
 	}
 	
 	private void areaTexto() {
-		instrucciones = new JTextArea();
+		instrucciones = new JTextArea("aqui va el texto...");
 		instrucciones.setBounds(20, 20, 300, 300);
+		instrucciones.setBackground(Color.black);
+		instrucciones.setForeground(Color.WHITE);
 		instrucciones.setEditable(false); 
 		add(instrucciones);
 	}

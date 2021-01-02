@@ -24,7 +24,7 @@ public class PanelAdmin extends JPanel {
 	}
 	
 	private void paneles() {
-		panelCrearExamen = new PanelCrearExamen();
+		panelCrearExamen = new PanelCrearExamen(this);
 		panelCrearExamen.setVisible(false);
 		add(panelCrearExamen);
 		
@@ -49,6 +49,12 @@ public class PanelAdmin extends JPanel {
 		gestionarUsuarios = new JButton("GESTION USUARIOS");
 		gestionarUsuarios.setBounds(30, 150, 150, 25);
 		add(gestionarUsuarios);
+	}
+	
+	public void noVisisble() {
+		this.crearExamen.setEnabled(true);
+		this.eliminarExamen.setEnabled(true);
+		this.gestionarUsuarios.setEnabled(true);
 	}
 	
 	public void visible() {
@@ -111,5 +117,13 @@ public class PanelAdmin extends JPanel {
 
 	public void setDatos(Exam datos) {
 		this.datos = datos;
+	}
+
+	public PanelExamen getPanelExamen() {
+		return panelExamen;
+	}
+
+	public void setPanelExamen(PanelExamen panelExamen) {
+		this.panelExamen = panelExamen;
 	}
 }

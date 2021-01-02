@@ -1,0 +1,3 @@
+PC,velocidad de la luz es		,1,300.000
+PSM,capital de la region de coquimbo,1,1,3,la serena,coquimbo,illapel
+PTF,altura promedio de un ser humano es de 170 m,1,false

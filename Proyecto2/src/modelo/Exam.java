@@ -2,6 +2,9 @@ package modelo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +17,7 @@ import java.util.Scanner;
  */
 public class Exam {
 	private ArrayList<String> namExam;
-	private ArrayList<Pregunta> preguntas;
+	private ArrayList<Pregunta> preguntas; 
 	private ArrayList<Usuario> usuarios;
 	private Usuario u;
 	private int contador;
@@ -158,6 +161,56 @@ public class Exam {
 			}
 		}
 		archivo.close();
+	}
+	
+	
+	public void archivoExamen(String nombreExamen) throws IOException {
+		FileWriter ficheroExamen = new FileWriter("archivos/examenes.txt",true);
+		PrintWriter archivoExamen = new PrintWriter(ficheroExamen);
+		archivoExamen.println(nombreExamen);
+		FileWriter ficheroNuevo = new FileWriter("archivos/examen_"+nombreExamen+".txt");
+		PrintWriter archivo = new PrintWriter(ficheroNuevo);
+		for(int i=0;i<this.getPreguntas().size();i++) {
+			if(this.getPreguntas().get(i) instanceof TFpregunta) {
+				TFpregunta aux = (TFpregunta) this.getPreguntas().get(i);
+				archivo.println("PTF,"+aux.getText()+","+aux.getPeso()+","+aux.getRespuestaCorrecta());
+			}else {
+				if(this.getPreguntas().get(i) instanceof PregunCortas) {
+					PregunCortas aux = (PregunCortas) this.getPreguntas().get(i);
+					archivo.println("PC,"+aux.getText()+","+aux.getPeso()+","+aux.getRespuesta());
+				}else {
+					if(this.getPreguntas().get(i) instanceof PreguntSelecMul) {
+						PreguntSelecMul aux = (PreguntSelecMul) this.getPreguntas().get(i);
+						int z;
+						for(z=0;z<aux.getRespuestas().length;z++) {
+							if(aux.getRespuestas()[z] == null) break;
+						} 
+						archivo.print("PSM,"+aux.getText()+","+aux.getPeso()+","+aux.getRespuesta()+","+z);
+						for(int j=0;j<z;j++) {
+							archivo.print(","+aux.getRespuestas()[j]);
+						}
+						archivo.println();
+					}
+				}
+			}
+		}
+		ficheroExamen.close();
+		archivoExamen.close();
+		ficheroNuevo.close();
+		archivo.close();
+	}
+	
+	public void eliminarExamen(int indice) throws IOException {
+		File archivo = new File("archivos/examen_"+this.getNamExam().get(indice)+".txt");
+		FileWriter ficheroExamen = new FileWriter("archivos/examenes.txt");
+		PrintWriter archivoExamen = new PrintWriter(ficheroExamen);
+		this.getNamExam().remove(indice);
+		for(int j=0;j<this.getNamExam().size();j++) {
+			archivoExamen.println(this.getNamExam().get(j));
+		}
+		archivoExamen.close();
+		ficheroExamen.close();
+		if(archivo.delete());
 	}
 	/**
 	 * metodo que retorna la lista de usuarios

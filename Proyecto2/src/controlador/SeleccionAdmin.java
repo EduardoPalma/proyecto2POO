@@ -17,7 +17,8 @@ public class SeleccionAdmin implements ActionListener {
 		if(e.getSource() == panel.getCrearExamen()) {
 			panel.getPanelCrearExamen().setVisible(true);
 			panel.getPanelEliminarExamen().noVisible();
-			//panel.visible();
+			panel.getPanelCrearExamen().visible();
+			panel.visible();
 		}else {
 			if(e.getSource() == panel.getEliminarExamen()) {
 				panel.getPanelEliminarExamen().setVisible(true);

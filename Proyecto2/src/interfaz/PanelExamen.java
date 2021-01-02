@@ -17,6 +17,7 @@ public class PanelExamen extends JPanel {
 	
 	public PanelExamen(ArrayList<String> nombrePruebas) {
 		this.nombrePruebas = nombrePruebas;
+		this.setBackground(Color.black);
 		setLayout(null);
 		textos();
 		cargarNombresPruebas();
@@ -36,6 +37,8 @@ public class PanelExamen extends JPanel {
 	private void textos() {
 		seleccion = new JLabel("Seleccione un Examen");
 		seleccion.setBounds(25, 25, 150, 25);
+		seleccion.setBackground(Color.black);
+		seleccion.setForeground(Color.WHITE);
 		add(seleccion);
 	}
 	
