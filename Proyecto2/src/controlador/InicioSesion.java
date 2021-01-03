@@ -23,18 +23,33 @@ public class InicioSesion implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Usuario u = datos.buscar(panel.getRegistroU().getText(), panel.getRegistroPW().getPassword());
-		if(u == null) {
-			JOptionPane.showMessageDialog(panel,"Nombre de Usuario o Contraseña Incorrectos");
-			vaciar();
+		if(e.getSource() == panel.getBottonIniciarSesion()) {
+			Usuario u = datos.buscar(panel.getRegistroU().getText(), panel.getRegistroPW().getPassword());
+			if(u == null) {
+				JOptionPane.showMessageDialog(panel,"Nombre de Usuario o Contraseña Incorrectos");
+				vaciar();
+			}else {
+				datos.setU(u);
+				pesta.setEnabledAt(1, false);
+				pesta.setEnabledAt(2, true);
+				pesta.setEnabledAt(3, true);
+				if(datos.getU().isAdmin()) pesta.setEnabledAt(4, true);
+				JOptionPane.showMessageDialog(panel,"Inicio de Sesion Exitoso");
+				panel.getBottonIniciarSesion().setEnabled(false);
+				panel.getBottonCerrarSesion().setEnabled(true);
+				vaciar();
+			}
 		}else {
-			datos.setU(u);
-			pesta.setEnabledAt(1, false);
-			pesta.setEnabledAt(2, true);
-			pesta.setEnabledAt(3, true);
-			JOptionPane.showMessageDialog(panel,"Inicio de Sesion Exitoso");
-			panel.getBottonIniciarSesion().setEnabled(false);
-			vaciar();
+			if(e.getSource() == panel.getBottonCerrarSesion()) {
+				JOptionPane.showMessageDialog(panel,"A Cerrado Sesion "); 
+				panel.getBottonIniciarSesion().setEnabled(true);
+				panel.getBottonCerrarSesion().setEnabled(false);
+				datos.setU(null);
+				pesta.setEnabledAt(1, true);
+				pesta.setEnabledAt(2, false);
+				pesta.setEnabledAt(3, false);
+				pesta.setEnabledAt(4, false);
+			}
 		}
 	}
 	

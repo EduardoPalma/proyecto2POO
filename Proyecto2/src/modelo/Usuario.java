@@ -12,6 +12,7 @@ public class Usuario {
 	private String nombreUsuario;
 	private String correo;
 	private boolean admin;
+	private boolean profesor;
 	
 	private int puntaje;
 	
@@ -28,6 +29,7 @@ public class Usuario {
 		this.correo = correo;
 		this.puntaje = 0;
 		this.admin = false;
+		this.profesor = false;
 	}
 
 
@@ -88,6 +90,26 @@ public class Usuario {
 
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
+	}
+
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+
+	public boolean isProfesor() {
+		return profesor;
+	}
+
+
+	public void setProfesor(boolean profesor) {
+		this.profesor = profesor;
 	}
 	
 }

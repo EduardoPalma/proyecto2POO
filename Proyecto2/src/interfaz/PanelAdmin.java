@@ -32,7 +32,7 @@ public class PanelAdmin extends JPanel {
 		panelEliminarExamen.setVisible(false);
 		add(panelEliminarExamen);
 		
-		panelGestionarUsuarios = new PanelGestionarUsuarios();
+		panelGestionarUsuarios = new PanelGestionarUsuarios(this);
 		panelGestionarUsuarios.setVisible(false);
 		add(panelGestionarUsuarios);
 	}

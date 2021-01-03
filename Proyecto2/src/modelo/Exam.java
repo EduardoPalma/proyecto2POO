@@ -5,8 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 
 /**
@@ -21,6 +28,15 @@ public class Exam {
 	private ArrayList<Usuario> usuarios;
 	private Usuario u;
 	private int contador;
+	
+	static {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.print("error");
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * constructor de la clase Exam
@@ -64,7 +80,6 @@ public class Exam {
 		}else return false;
 	}
 
-	@SuppressWarnings("unused")
 	public Usuario buscar(String nombreUsuario,char [] password) {
 		for(int i=0;i<this.usuarios.size();i++) {
 			Usuario u = usuarios.get(i);
@@ -76,8 +91,6 @@ public class Exam {
 					}
 					return u;
 				}
-			}else {
-				return null;
 			}
 		}
 		return null;
@@ -212,6 +225,70 @@ public class Exam {
 		ficheroExamen.close();
 		if(archivo.delete());
 	}
+	
+	public void ingresarUsuario(Usuario u) throws IOException {
+		FileWriter ficheroExamen = new FileWriter("archivos/usuarios.txt",true);
+		PrintWriter archivoExamen = new PrintWriter(ficheroExamen);
+		archivoExamen.println(u.getNombre()+","+u.getApellido()+","+String.valueOf(u.getPassword())+","+u.getNombreUsuario()+","+u.getCorreo()+","+u.isProfesor()+","+u.isAdmin());
+		archivoExamen.close();
+		ficheroExamen.close();
+	}
+	
+	public void ingresoUsuariosAlSistema() throws FileNotFoundException {
+		Scanner archivo = new Scanner(new File("archivos/usuarios.txt"));
+		while(archivo.hasNextLine()) {
+			String linea = archivo.nextLine();
+			String [] parte = linea.split(",");
+			String nombre = parte[0];
+			String apellidos =parte[1];
+			char [] pass = new char[parte[2].length()];
+			for(int i=0;i<parte[2].length();i++) {
+				pass[i] = parte[2].charAt(i);
+			}
+			String nomUsuario = parte[3];
+			String correo =  parte[4];
+			Usuario u = new Usuario(nombre,apellidos,pass,nomUsuario,correo);
+			if(parte[5].equals("true")) u.setProfesor(true);
+			if(parte[6].equals("true")) u.setAdmin(true);
+			this.agregarUsuario(u);
+		}
+	}
+	
+	
+	public Connection ConectBaseDeDatos() throws ClassNotFoundException, SQLException {
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/tablaprogra?serverTimezone=UTC","root","9aad96631");
+	}
+	
+	public void sacarDatos() throws ClassNotFoundException, SQLException {
+		Connection conex = this.ConectBaseDeDatos();
+		Statement s = conex.createStatement();
+		ResultSet r = s.executeQuery("SELECT * FROM tablapuntajesusuarios");
+		
+		while(r.next()) {
+			String usuario = r.getString(0);
+			String nombreUsuario = r.getString(1);
+			String nombreExamen = r.getString(2);
+			int puntaje = r.getInt(3);
+		}
+	}
+	
+	
+	public void ingresarDatos(String nombre,String nombreUsuario,String nombreExamen,int puntaje) {
+		Connection conex;
+		try {
+			conex = this.ConectBaseDeDatos();
+			PreparedStatement s = conex.prepareStatement("INSERT INTO tablapuntajesusuarios (Usuario,nombreUsuario,nombreExamen,puntaje) VALUES(?,?,?,?)");
+			s.setString(1, nombre);
+			s.setString(2, nombreUsuario);
+			s.setString(3, nombreExamen);
+			s.setInt(4, puntaje);
+			
+			s.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			System.out.print("no funciona");
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * metodo que retorna la lista de usuarios
 	 * @return
@@ -242,5 +319,14 @@ public class Exam {
 
 	public void setU(Usuario u) {
 		this.u = u;
+	}
+
+	public Usuario buscar(String text) {
+		for(int i=0;i<this.usuarios.size();i++) {
+			if(this.usuarios.get(i).getNombreUsuario().equals(text)) {
+				return u = this.usuarios.get(i);
+			}
+		}
+		return null;
 	}
 }

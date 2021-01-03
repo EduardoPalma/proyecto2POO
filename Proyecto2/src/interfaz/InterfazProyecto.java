@@ -1,5 +1,7 @@
 package interfaz;
 
+import java.io.FileNotFoundException;
+
 import javax.swing.*;
 
 import controlador.HacerExamen;
@@ -20,13 +22,14 @@ public class InterfazProyecto extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
-	public InterfazProyecto(Exam datos){
+	public InterfazProyecto(Exam datos) throws FileNotFoundException{
 		this.datos = datos;
 		setTitle("Proyecto 2");
 		setSize(600,400);
 		setLocationRelativeTo(this);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		datos.ingresoUsuariosAlSistema();
 		iniciarPestañas();
 		eventos();
 		setVisible(true);
@@ -47,9 +50,9 @@ public class InterfazProyecto extends JFrame {
 		pesta.add("Admin",panelAdmin);
 		add(pesta);
 		
-		//pesta.setEnabledAt(2, false);
-		//pesta.setEnabledAt(3, false);
-		//pesta.setEnabledAt(4, false);
+		pesta.setEnabledAt(2, false);
+		pesta.setEnabledAt(3, false);
+		pesta.setEnabledAt(4, false);
 		
 	}
 	
@@ -58,6 +61,7 @@ public class InterfazProyecto extends JFrame {
 		panelRegistro.getRegistro().addActionListener(registroUsuario);
 		InicioSesion inicioSesion = new InicioSesion(panelIntro,datos,pesta);
 		panelIntro.getBottonIniciarSesion().addActionListener(inicioSesion);
+		panelIntro.getBottonCerrarSesion().addActionListener(inicioSesion);
 		HacerExamen hacerExamen = new HacerExamen(panelExamen,datos);
 		panelExamen.getHacerExamen().addActionListener(hacerExamen);
 		panelExamen.getPanelExamen().getSiguiente().addActionListener(hacerExamen);

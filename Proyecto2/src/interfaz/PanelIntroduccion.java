@@ -13,7 +13,7 @@ public class PanelIntroduccion extends JPanel {
 	private JTextField registroU;
 	private JPasswordField registroPW;
 	private JTextArea instrucciones;
-	private JButton bottonIniciarSesion;
+	private JButton bottonIniciarSesion,bottonCerrarSesion;
 	
 	public PanelIntroduccion() {
 		setLayout(null);
@@ -57,6 +57,11 @@ public class PanelIntroduccion extends JPanel {
 		bottonIniciarSesion = new JButton("iniciar Sesion");
 		bottonIniciarSesion.setBounds(395, 200, 120, 25);
 		add(bottonIniciarSesion);
+		
+		this.bottonCerrarSesion = new JButton("Cerrar Sesion");
+		this.bottonCerrarSesion.setBounds(395, 240, 120, 25);
+		this.bottonCerrarSesion.setEnabled(false);
+		add(this.bottonCerrarSesion);
 	}
 
 	public JLabel getUsuario() {
@@ -105,6 +110,14 @@ public class PanelIntroduccion extends JPanel {
 
 	public void setBottonIniciarSesion(JButton bottonIniciarSesion) {
 		this.bottonIniciarSesion = bottonIniciarSesion;
+	}
+
+	public JButton getBottonCerrarSesion() {
+		return bottonCerrarSesion;
+	}
+
+	public void setBottonCerrarSesion(JButton bottonCerrarSesion) {
+		this.bottonCerrarSesion = bottonCerrarSesion;
 	}
 	
 }

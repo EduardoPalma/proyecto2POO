@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -30,6 +31,12 @@ public class RegistroUsuario implements ActionListener {
 			}else {
 				Usuario u = new Usuario(panel.getRegistro1().getText(),panel.getRegistro2().getText(),panel.getRegistro4().getPassword(),panel.getRegistro3().getText(),panel.getRegistro6().getText());
 				datos.agregarUsuario(u);
+				try {
+					datos.ingresarUsuario(u);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				JOptionPane.showMessageDialog(panel," ¡¡ Usuario Registro con existo !!");
 				vaciar();
 			}

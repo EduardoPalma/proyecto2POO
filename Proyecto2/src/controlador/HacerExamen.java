@@ -65,7 +65,8 @@ public class HacerExamen implements ActionListener {
 					botonAnt();
 				}else {
 					if(e.getSource() == panel.getFinalizarExamen()) {
-						terminarExamen();
+						String nombreExamen = (String) panel.getPruebas().getSelectedItem();
+						terminarExamen(nombreExamen);
 					}
 				}
 			}
@@ -114,8 +115,9 @@ public class HacerExamen implements ActionListener {
 	}
 	
 	
-	private void terminarExamen() {
+	private void terminarExamen(String nombreExamen) {
 		JOptionPane.showMessageDialog(panel, "Examen finalizado Correctamente \n Porcentaje Obtenido Correcto "+datos.darExam(respuestas)+"%");
+		datos.ingresarDatos(datos.getU().getNombreUsuario(), datos.getU().getNombre(), nombreExamen,datos.darExam(respuestas));
 		panel.getFinalizarExamen().setEnabled(false);
 		panel.getPruebas().setEnabled(true);
 		panel.getHacerExamen().setEnabled(true);

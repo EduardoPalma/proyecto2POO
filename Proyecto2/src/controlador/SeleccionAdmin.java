@@ -18,18 +18,26 @@ public class SeleccionAdmin implements ActionListener {
 			panel.getPanelCrearExamen().setVisible(true);
 			panel.getPanelEliminarExamen().noVisible();
 			panel.getPanelCrearExamen().visible();
+			panel.getPanelGestionarUsuarios().getTablaUsuarios().getModelo().setRowCount(0);
 			panel.visible();
+			panel.getPanelGestionarUsuarios().getTablaUsuarios().noVisisble();
 		}else {
 			if(e.getSource() == panel.getEliminarExamen()) {
 				panel.getPanelEliminarExamen().setVisible(true);
 				panel.getPanelEliminarExamen().visible();
 				panel.getPanelCrearExamen().setVisible(false);
 				panel.getPanelGestionarUsuarios().setVisible(false);
+				panel.getGestionarUsuarios().setEnabled(true);
+				panel.getPanelGestionarUsuarios().getTablaUsuarios().getModelo().setRowCount(0);
+				panel.getPanelGestionarUsuarios().getTablaUsuarios().noVisisble();
 			}else {
 				if(e.getSource() == panel.getGestionarUsuarios()) {
 					panel.getPanelEliminarExamen().setVisible(false);
 					panel.getPanelCrearExamen().setVisible(false);
 					panel.getPanelGestionarUsuarios().setVisible(true);
+					panel.getPanelGestionarUsuarios().getTablaUsuarios().ingresarUsuariosATabla(panel.getDatos());
+					panel.getGestionarUsuarios().setEnabled(false);
+					panel.getPanelGestionarUsuarios().getTablaUsuarios().visible();;
 				}
 			}
 		}
