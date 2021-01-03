@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -22,7 +23,7 @@ public class InterfazProyecto extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
-	public InterfazProyecto(Exam datos) throws FileNotFoundException{
+	public InterfazProyecto(Exam datos) throws FileNotFoundException, ClassNotFoundException, SQLException{
 		this.datos = datos;
 		setTitle("Proyecto 2");
 		setSize(600,400);
@@ -35,12 +36,12 @@ public class InterfazProyecto extends JFrame {
 		setVisible(true);
 	}
 	
-	private void iniciarPestañas() {
+	private void iniciarPestañas() throws ClassNotFoundException, SQLException {
 		pesta = new JTabbedPane();
 		panelIntro = new PanelIntroduccion();
 		panelRegistro = new PanelRegistro();
 		panelExamen = new PanelExamen(datos.getNamExam());
-		panelEsta = new PanelEstadisticas();
+		panelEsta = new PanelEstadisticas(datos);
 		panelAdmin = new PanelAdmin(datos,panelExamen);
 		
 		pesta.add("Intrucciones",panelIntro);
@@ -51,7 +52,7 @@ public class InterfazProyecto extends JFrame {
 		add(pesta);
 		
 		pesta.setEnabledAt(2, false);
-		pesta.setEnabledAt(3, false);
+		//pesta.setEnabledAt(3, false);
 		pesta.setEnabledAt(4, false);
 		
 	}

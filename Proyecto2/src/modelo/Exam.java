@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import interfaz.PanelEstadisticas;
+
 
 
 /**
@@ -259,16 +261,58 @@ public class Exam {
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/tablaprogra?serverTimezone=UTC","root","9aad96631");
 	}
 	
-	public void sacarDatos() throws ClassNotFoundException, SQLException {
+	public void ordenarDatos(PanelEstadisticas panelEsta,int menor) throws SQLException, ClassNotFoundException {
 		Connection conex = this.ConectBaseDeDatos();
 		Statement s = conex.createStatement();
-		ResultSet r = s.executeQuery("SELECT * FROM tablapuntajesusuarios");
+		ResultSet r ;
+		if(this.u == null) {
+			if(menor == 0) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje DESC");
+			else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje");
+		}else {
+			if(menor == 0) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario = '"+this.u.getNombreUsuario()+"' ORDER BY puntaje DESC");
+			else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario ='"+this.u.getNombreUsuario()+"' ORDER BY puntaje");
+		}
+		while(r.next()) {
+			
+			Object [] fila=new Object[4];
+			String usuario = r.getString(1);
+			String nombreUsuario = r.getString(2);
+			String nombreExamen = r.getString(3);
+			int puntaje = r.getInt(4);
+			
+			fila[0] = usuario;
+			fila[1] = nombreUsuario;
+			fila[2] = nombreExamen;
+			fila[3] = puntaje;
+			
+			panelEsta.getModelo().addRow(fila);
+			panelEsta.getTabla().setModel(panelEsta.getModelo());
+		}
+		
+	}
+	
+	
+	public void sacarDatos(PanelEstadisticas panelEsta) throws ClassNotFoundException, SQLException {
+		Connection conex = this.ConectBaseDeDatos();
+		Statement s = conex.createStatement();
+		ResultSet r;
+		if(this.u == null) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios");
+		else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario = '"+this.u.getNombreUsuario()+"'");
 		
 		while(r.next()) {
-			String usuario = r.getString(0);
-			String nombreUsuario = r.getString(1);
-			String nombreExamen = r.getString(2);
-			int puntaje = r.getInt(3);
+			Object [] fila=new Object[4];
+			String usuario = r.getString(1);
+			String nombreUsuario = r.getString(2);
+			String nombreExamen = r.getString(3);
+			int puntaje = r.getInt(4);
+			
+			fila[0] = usuario;
+			fila[1] = nombreUsuario;
+			fila[2] = nombreExamen;
+			fila[3] = puntaje;
+			
+			panelEsta.getModelo().addRow(fila);
+			panelEsta.getTabla().setModel(panelEsta.getModelo());
 		}
 	}
 	
