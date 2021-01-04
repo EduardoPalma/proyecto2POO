@@ -33,7 +33,17 @@ public class InicioSesion implements ActionListener {
 				pesta.setEnabledAt(1, false);
 				pesta.setEnabledAt(2, true);
 				pesta.setEnabledAt(3, true);
-				if(datos.getU().isAdmin()) pesta.setEnabledAt(4, true);
+				if(datos.getU().isProfesor()) {
+					pesta.setEnabledAt(4, true);
+					panel.getPa().getEliminarExamen().setEnabled(false);
+					panel.getPa().getGestionarUsuarios().setEnabled(false);
+				}else {
+					if(datos.getU().isAdmin()) {
+						pesta.setEnabledAt(4, true);
+						panel.getPa().getEliminarExamen().setEnabled(true);
+						panel.getPa().getGestionarUsuarios().setEnabled(true);
+					}
+				}
 				JOptionPane.showMessageDialog(panel,"Inicio de Sesion Exitoso");
 				panel.getBottonIniciarSesion().setEnabled(false);
 				panel.getBottonCerrarSesion().setEnabled(true);
@@ -44,6 +54,11 @@ public class InicioSesion implements ActionListener {
 				JOptionPane.showMessageDialog(panel,"A Cerrado Sesion "); 
 				panel.getBottonIniciarSesion().setEnabled(true);
 				panel.getBottonCerrarSesion().setEnabled(false);
+				panel.getPa().getEliminarExamen().setEnabled(true);
+				panel.getPa().getGestionarUsuarios().setEnabled(true);
+				panel.getPa().getPanelCrearExamen().setVisible(false);
+				panel.getPa().getPanelEliminarExamen().setVisible(false);
+				panel.getPa().getPanelGestionarUsuarios().setVisible(false);
 				datos.setU(null);
 				pesta.setEnabledAt(1, true);
 				pesta.setEnabledAt(2, false);

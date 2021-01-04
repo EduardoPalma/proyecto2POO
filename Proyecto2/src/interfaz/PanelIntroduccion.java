@@ -14,8 +14,10 @@ public class PanelIntroduccion extends JPanel {
 	private JPasswordField registroPW;
 	private JTextArea instrucciones;
 	private JButton bottonIniciarSesion,bottonCerrarSesion;
+	private PanelAdmin pa;
 	
-	public PanelIntroduccion() {
+	public PanelIntroduccion(PanelAdmin pa) {
+		this.pa = pa;
 		setLayout(null);
 		this.setBackground(Color.DARK_GRAY);
 		areaTexto();
@@ -136,6 +138,14 @@ public class PanelIntroduccion extends JPanel {
 
 	public void setBottonCerrarSesion(JButton bottonCerrarSesion) {
 		this.bottonCerrarSesion = bottonCerrarSesion;
+	}
+
+	public PanelAdmin getPa() {
+		return pa;
+	}
+
+	public void setPa(PanelAdmin pa) {
+		this.pa = pa;
 	}
 	
 }

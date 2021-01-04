@@ -110,7 +110,7 @@ public class PanelRealizarExamen extends JPanel {
 		int posy = 0;
 		for(int i=0;i<6;i++) {
 			JRadioButton boton = new JRadioButton();
-			boton.setBounds(50, 80+posy, 100, 25);
+			boton.setBounds(50, 80+posy, 200, 25);
 			boton.setForeground(Color.WHITE);
 			boton.setBackground(Color.DARK_GRAY);
 			boton.setVisible(false);

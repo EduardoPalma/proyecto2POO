@@ -1,13 +1,8 @@
-Eduardo Armando,Palma Pizarro,9aad96631,Eduardo,correo,false,true
+Eduardo Armando,Palma Pizarro,9aad96631,Eduardo,correo,false,false
 juan alejandro,gomez ortiz,5555,Juanito,correo,false,false
 pedro ,rojas zuñiga,12351,pedro123,correoPedro,false,false
 Katherine Maria,cortez rubilar,kathy5,kathy,correoKathy,false,false
 fernanda Elizabeth,godoy araya,fer413,fer,correoFer,true,false
-Veronica Marcela,Pizarro La paz,1234,vero,correoVeronica,false,false
+Veronica Marcela,Pizarro La paz,1234,vero,correoVeronica,false,true
 Marcelo,Rojas,1234,Marce,marce!,false,false
-asd,ffa,12345,Usuario,affa,false,false
-Usuario,UsuariApellido,4321,usuario,usuarioCorreo,false,false
-usuario2,usuario2Apellido,1234,Usuario2,usuarioCorreo2,false,false
-Usuario3,usuarioAPlleido,1234,usuario3,usuariiCorreo3,false,false
-usuario4,usuario4A,12345,usuario4,usuarioCorreo4,false,false
-usuarioab,asdad,12345,usuario5,correo,false,false
+nombre,apellido,4321,usuario,correoUsuario,true,false

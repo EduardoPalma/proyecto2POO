@@ -33,6 +33,12 @@ public class EventosEstadisticas implements ActionListener {
 				}
 			}else{
 				if(panelEsta.getBotton2() == e.getSource()){
+					try {
+						panelEsta.getDatos().obtenerPuntajeMasAlto();
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		}

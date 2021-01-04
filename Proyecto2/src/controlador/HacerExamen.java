@@ -65,8 +65,9 @@ public class HacerExamen implements ActionListener {
 					botonAnt();
 				}else {
 					if(e.getSource() == panel.getFinalizarExamen()) {
+						int indice = panel.getPanelExamen().getIndicePregunta();
 						String nombreExamen = (String) panel.getPruebas().getSelectedItem();
-						terminarExamen(nombreExamen);
+						terminarExamen(nombreExamen,indice);
 					}
 				}
 			}
@@ -115,8 +116,9 @@ public class HacerExamen implements ActionListener {
 	}
 	
 	
-	private void terminarExamen(String nombreExamen) {
+	private void terminarExamen(String nombreExamen,int indice) {
 		JOptionPane.showMessageDialog(panel, "Examen finalizado Correctamente \n Porcentaje Obtenido Correcto "+datos.darExam(respuestas)+"%");
+		respuestaPreguntas(datos.getPreguntas().get(indice),indice);
 		datos.ingresarDatos(datos.getU().getNombreUsuario(), datos.getU().getNombre(), nombreExamen,datos.darExam(respuestas));
 		panel.getFinalizarExamen().setEnabled(false);
 		panel.getPruebas().setEnabled(true);
@@ -146,6 +148,7 @@ public class HacerExamen implements ActionListener {
 			panel.getPanelExamen().getTipoPregunta().setText("Pregunta Verdadero y falso");
 		}else {
 			if(p instanceof PreguntSelecMul ) {
+				panel.getPanelExamen().limpiarGrupoBotones();
 				panel.getPanelExamen().cargarSelecciones(((PreguntSelecMul) p).getRespuestas());
 				panel.getPanelExamen().noVisibleVF();
 				panel.getPanelExamen().getRespuesta().setVisible(false);
@@ -182,14 +185,12 @@ public class HacerExamen implements ActionListener {
 	private void guardarRespuestaVerdaderoFalso(int indice) {
 		if(panel.getPanelExamen().getVerdadero().isSelected() == true) {
 			this.respuestas.set(indice, "true");
-			System.out.println("selecciono verdadero");
 		}else {
 			if(panel.getPanelExamen().getFalso().isSelected() == true) {
 				this.respuestas.set(indice, "false");
 			}
 		}
 		
-		System.out.println(this.respuestas.toString());
 		
 	}
 	

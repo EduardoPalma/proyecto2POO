@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import interfaz.PanelEstadisticas;
 
 
@@ -228,13 +230,20 @@ public class Exam {
 		if(archivo.delete());
 	}
 	
-	public void ingresarUsuario(Usuario u) throws IOException {
+	public void ingresarUsuario(Usuario u,int si) throws IOException {
 		FileWriter ficheroExamen = new FileWriter("archivos/usuarios.txt");
 		PrintWriter archivoExamen = new PrintWriter(ficheroExamen);
-		this.getUsuarios().add(u);
-		for(int i=0;i<this.getUsuarios().size();i++) {
-			Usuario us = this.getUsuarios().get(i);
-			archivoExamen.println(us.getNombre()+","+us.getApellido()+","+String.valueOf(us.getPassword())+","+us.getNombreUsuario()+","+us.getCorreo()+","+us.isProfesor()+","+us.isAdmin());
+		if(si == 1) {
+			this.getUsuarios().add(u);
+			for(int i=0;i<this.getUsuarios().size();i++) {
+				Usuario us = this.getUsuarios().get(i);
+				archivoExamen.println(us.getNombre()+","+us.getApellido()+","+String.valueOf(us.getPassword())+","+us.getNombreUsuario()+","+us.getCorreo()+","+us.isProfesor()+","+us.isAdmin());
+			}
+		}else {
+			for(int i=0;i<this.getUsuarios().size();i++) {
+				Usuario us = this.getUsuarios().get(i);
+				archivoExamen.println(us.getNombre()+","+us.getApellido()+","+String.valueOf(us.getPassword())+","+us.getNombreUsuario()+","+us.getCorreo()+","+us.isProfesor()+","+us.isAdmin());
+			}
 		}
 		archivoExamen.close();
 		ficheroExamen.close();
@@ -265,6 +274,33 @@ public class Exam {
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/tablaprogra?serverTimezone=UTC","root","9aad96631");
 	}
 	
+	public void obtenerPuntajeMasAlto() throws SQLException, ClassNotFoundException {
+		Connection conex = this.ConectBaseDeDatos();
+		Statement s = conex.createStatement();
+		ResultSet r ;
+		if(this.u.isAdmin() || this.u.isProfesor()) {
+			r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje DESC LIMIT 1");
+		}else {
+			r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario = '"+this.u.getNombreUsuario()+"' ORDER BY puntaje DESC LIMIT 1");
+		}
+		while(r.next()) {
+			
+			Object [] fila=new Object[4];
+			String usuario = r.getString(1);
+			String nombreUsuario = r.getString(2);
+			String nombreExamen = r.getString(3);
+			int puntaje = r.getInt(4);
+			
+			fila[0] = usuario;
+			fila[1] = nombreUsuario;
+			fila[2] = nombreExamen;
+			fila[3] = puntaje;
+			
+			if(this.u.isAdmin() || this.u.isProfesor()) JOptionPane.showMessageDialog(null, "PUNTAJE MAYOR "+puntaje+" Examen  "+nombreExamen+"  Usuario "+usuario);
+			else JOptionPane.showMessageDialog(null, "PUNTAJE MAYOR "+puntaje+" Examen  "+nombreExamen);
+		}
+	}
+	
 	public void ordenarDatos(PanelEstadisticas panelEsta,int menor) throws SQLException, ClassNotFoundException {
 		Connection conex = this.ConectBaseDeDatos();
 		Statement s = conex.createStatement();
@@ -273,7 +309,7 @@ public class Exam {
 			if(menor == 0) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje DESC");
 			else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje");
 		}else {
-			if(this.u.isAdmin()) {
+			if(this.u.isAdmin() || this.u.isProfesor()) {
 				if(menor == 0) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje DESC");
 				else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje");
 			}else {

@@ -31,7 +31,7 @@ public class RegistroUsuario implements ActionListener {
 			}else {
 				Usuario u = new Usuario(panel.getRegistro1().getText(),panel.getRegistro2().getText(),panel.getRegistro4().getPassword(),panel.getRegistro3().getText(),panel.getRegistro6().getText());
 				try {
-					datos.ingresarUsuario(u);
+					datos.ingresarUsuario(u,1);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

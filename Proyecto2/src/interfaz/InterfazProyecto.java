@@ -38,11 +38,11 @@ public class InterfazProyecto extends JFrame {
 	
 	public void iniciarPestañas() throws ClassNotFoundException, SQLException {
 		pesta = new JTabbedPane();
-		panelIntro = new PanelIntroduccion();
 		panelRegistro = new PanelRegistro();
 		panelExamen = new PanelExamen(datos.getNamExam());
 		panelEsta = new PanelEstadisticas(datos);
 		panelAdmin = new PanelAdmin(datos,panelExamen);
+		panelIntro = new PanelIntroduccion(panelAdmin);
 		
 		pesta.add("Intrucciones",panelIntro);
 		pesta.add("Registro Usuario",panelRegistro);
