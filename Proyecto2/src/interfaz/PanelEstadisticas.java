@@ -51,7 +51,7 @@ public class PanelEstadisticas extends JPanel {
 		botton1.addActionListener(e);
 		this.add(botton1);
 		
-		botton2 = new JButton("Obtener Usuario Con mas Examenes");
+		botton2 = new JButton("Obtener puntaje mas Alto");
 		botton2.setBounds(150, 260, 250, 25);
 		botton2.addActionListener(e);
 		this.add(botton2);

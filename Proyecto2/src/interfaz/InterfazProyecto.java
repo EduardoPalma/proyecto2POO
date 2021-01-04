@@ -52,7 +52,7 @@ public class InterfazProyecto extends JFrame {
 		add(pesta);
 		
 		pesta.setEnabledAt(2, false);
-		//pesta.setEnabledAt(3, false);
+		pesta.setEnabledAt(3, false);
 		pesta.setEnabledAt(4, false);
 		
 	}

@@ -229,9 +229,13 @@ public class Exam {
 	}
 	
 	public void ingresarUsuario(Usuario u) throws IOException {
-		FileWriter ficheroExamen = new FileWriter("archivos/usuarios.txt",true);
+		FileWriter ficheroExamen = new FileWriter("archivos/usuarios.txt");
 		PrintWriter archivoExamen = new PrintWriter(ficheroExamen);
-		archivoExamen.println(u.getNombre()+","+u.getApellido()+","+String.valueOf(u.getPassword())+","+u.getNombreUsuario()+","+u.getCorreo()+","+u.isProfesor()+","+u.isAdmin());
+		this.getUsuarios().add(u);
+		for(int i=0;i<this.getUsuarios().size();i++) {
+			Usuario us = this.getUsuarios().get(i);
+			archivoExamen.println(us.getNombre()+","+us.getApellido()+","+String.valueOf(us.getPassword())+","+us.getNombreUsuario()+","+us.getCorreo()+","+us.isProfesor()+","+us.isAdmin());
+		}
 		archivoExamen.close();
 		ficheroExamen.close();
 	}
@@ -269,8 +273,13 @@ public class Exam {
 			if(menor == 0) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje DESC");
 			else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje");
 		}else {
-			if(menor == 0) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario = '"+this.u.getNombreUsuario()+"' ORDER BY puntaje DESC");
-			else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario ='"+this.u.getNombreUsuario()+"' ORDER BY puntaje");
+			if(this.u.isAdmin()) {
+				if(menor == 0) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje DESC");
+				else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios ORDER BY puntaje");
+			}else {
+				if(menor == 0) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario = '"+this.u.getNombreUsuario()+"' ORDER BY puntaje DESC");
+				else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario ='"+this.u.getNombreUsuario()+"' ORDER BY puntaje");
+			}
 		}
 		while(r.next()) {
 			
@@ -297,7 +306,9 @@ public class Exam {
 		Statement s = conex.createStatement();
 		ResultSet r;
 		if(this.u == null) r = s.executeQuery("SELECT * FROM tablapuntajesusuarios");
-		else r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario = '"+this.u.getNombreUsuario()+"'");
+		else {
+			r = s.executeQuery("SELECT * FROM tablapuntajesusuarios WHERE usuario = '"+this.u.getNombreUsuario()+"'");
+		}
 		
 		while(r.next()) {
 			Object [] fila=new Object[4];

@@ -34,7 +34,7 @@ public class PanelIntroduccion extends JPanel {
 		add(registroU);
 		
 		
-		password = new JLabel("Contrase�a");
+		password = new JLabel("Contraseña");
 		password.setForeground(Color.WHITE);
 		password.setBounds(415, 100, 100, 50);
 		add(password);
@@ -45,12 +45,30 @@ public class PanelIntroduccion extends JPanel {
 	}
 	
 	private void areaTexto() {
-		instrucciones = new JTextArea("aqui va el texto...");
+		instrucciones = new JTextArea("INTRUCCIONES\r\n"
+				+ "• Para ingresar al sistema debe estar registrado(a) para lo anterior diríjase a la pestaña “Registro”.\r\n"
+				+ "       1. En caso de ser Usuario nuevo Solo podrá Realizar los exámenes que se encuentran en el sistema.\r\n"
+				+ "       2. En caso de ser nuevo Usuario y quiere ser profesor Contactarse con un Administrador.\r\n"
+				+ "       3. Para el cerrado de sesion porfavor aprete El botton “Cerrar Sesion”\r\n"
+				+ "\n• Para la realización de un examen ya ingresado al sistema diríjase a la pestaña “Exámenes”, tendrá la opción de elegir el examen que se encuentra en el sistema al seleccionar y apretar el botón Realizar Examen se procede a ingresar las respuestas de la preguntas en cuestión.\r\n"
+				+ "       1. Las preguntas son de tipo cuestionario ya sea.\r\n"
+				+ "             Preguntas de verdadero y falso.\r\n"
+				+ "             Preguntas de Selección Múltiple.\r\n"
+				+ "             Preguntas Cortas.\r\n"
+				+ "\n• Para ver estadísticas del usuario de los exámenes hechos por el diríjase la pestaña Estadísticas, tendrá opciones de ordenar de menor a mayor puntaje y viceversa, en el caso de no realizar estas opciones y quiere obtener el examen con mayor puntaje que ha realizado seleccione el botón “obtener”. \r\n"
+				+ "\n• Para el ingreso a la pestaña “Admin” si es profesor tendrá las siguiente opciones.\r\n"
+				+ "       1. Crear un Examen. Donde se le pedirán los distintos datos para el ingreso y la cantidad de preguntas del examen con un máximo de 10 preguntas.\r\n"
+				+ "\nANTE CUALQUIER PROBLEMA PORFAVOR CONTACTE CON SU ADMINISTRADOR\r\n"
+				+ "");
 		instrucciones.setBounds(20, 20, 300, 300);
 		instrucciones.setBackground(Color.black);
 		instrucciones.setForeground(Color.WHITE);
-		instrucciones.setEditable(false); 
-		add(instrucciones);
+		instrucciones.setLineWrap(true);
+		instrucciones.setWrapStyleWord(true);
+		instrucciones.setEditable(false);
+		JScrollPane scroll = new JScrollPane(instrucciones);
+		scroll.setBounds(20, 20, 300, 300);
+		add(scroll);
 	}
 	
 	private void inicioSesion() {
