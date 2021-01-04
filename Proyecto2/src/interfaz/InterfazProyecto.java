@@ -36,7 +36,7 @@ public class InterfazProyecto extends JFrame {
 		setVisible(true);
 	}
 	
-	private void iniciarPestañas() throws ClassNotFoundException, SQLException {
+	public void iniciarPestañas() throws ClassNotFoundException, SQLException {
 		pesta = new JTabbedPane();
 		panelIntro = new PanelIntroduccion();
 		panelRegistro = new PanelRegistro();
@@ -57,7 +57,7 @@ public class InterfazProyecto extends JFrame {
 		
 	}
 	
-	private void eventos() {
+	public void eventos() {
 		RegistroUsuario registroUsuario = new RegistroUsuario(panelRegistro,datos);
 		panelRegistro.getRegistro().addActionListener(registroUsuario);
 		InicioSesion inicioSesion = new InicioSesion(panelIntro,datos,pesta);
@@ -74,5 +74,65 @@ public class InterfazProyecto extends JFrame {
 		panelAdmin.getCrearExamen().addActionListener(seleccionAdmin);
 		panelAdmin.getGestionarUsuarios().addActionListener(seleccionAdmin);
 		
+	}
+
+	public PanelIntroduccion getPanelIntro() {
+		return panelIntro;
+	}
+
+	public void setPanelIntro(PanelIntroduccion panelIntro) {
+		this.panelIntro = panelIntro;
+	}
+
+	public PanelRegistro getPanelRegistro() {
+		return panelRegistro;
+	}
+
+	public void setPanelRegistro(PanelRegistro panelRegistro) {
+		this.panelRegistro = panelRegistro;
+	}
+
+	public PanelExamen getPanelExamen() {
+		return panelExamen;
+	}
+
+	public void setPanelExamen(PanelExamen panelExamen) {
+		this.panelExamen = panelExamen;
+	}
+
+	public PanelEstadisticas getPanelEsta() {
+		return panelEsta;
+	}
+
+	public void setPanelEsta(PanelEstadisticas panelEsta) {
+		this.panelEsta = panelEsta;
+	}
+
+	public PanelAdmin getPanelAdmin() {
+		return panelAdmin;
+	}
+
+	public void setPanelAdmin(PanelAdmin panelAdmin) {
+		this.panelAdmin = panelAdmin;
+	}
+
+	public JTabbedPane getPesta() {
+		return pesta;
+	}
+
+	public void setPesta(JTabbedPane pesta) {
+		this.pesta = pesta;
+	}
+
+	public Exam getDatos() {
+		return datos;
+	}
+
+	public void setDatos(Exam datos) {
+		this.datos = datos;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }
