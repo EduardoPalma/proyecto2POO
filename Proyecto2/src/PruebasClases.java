@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.UnsupportedLookAndFeelException;
+
 import org.junit.Test;
 
 import interfaz.InterfazProyecto;
@@ -17,7 +19,7 @@ public class PruebasClases {
 	private InterfazProyecto ip;
 
 	
-	public PruebasClases() throws FileNotFoundException, ClassNotFoundException, SQLException {
+	public PruebasClases() throws FileNotFoundException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		e = new Exam();
 		ip = new InterfazProyecto(e);
 		

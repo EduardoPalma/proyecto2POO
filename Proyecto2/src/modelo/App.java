@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import javax.swing.UnsupportedLookAndFeelException;
+
 import interfaz.InterfazProyecto;
 
 public class App {
@@ -17,7 +19,7 @@ public class App {
 		}
 		archivo.close();
 	}
-	public static void main(String [] args) throws FileNotFoundException, ClassNotFoundException, SQLException {
+	public static void main(String [] args) throws FileNotFoundException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		Exam datos = new Exam();
 		examenes(datos);
 		new InterfazProyecto(datos);

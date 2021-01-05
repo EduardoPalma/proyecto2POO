@@ -1,0 +1,3 @@
+PTF,prueba1 verdadero y falso,1,true
+PSM,prueba selec multiple,4,2,4,alternativa 1,alternativa 2,alternativa 3,alternativa 4
+PC,prueba pregunta corta,4,respuesta corta

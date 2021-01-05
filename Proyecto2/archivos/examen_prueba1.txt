@@ -1,0 +1,4 @@
+PC,capital de coquimbo es ,1,coquimbo
+PSM,la suma de 4 veces 4 es ,1,2,4,1,6,16,43
+PTF,casos de covid en chile son 300.000,1,true
+PTF,si me dicen que la casa es azul .de que color en la casa azul?,1,true

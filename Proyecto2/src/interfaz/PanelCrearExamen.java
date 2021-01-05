@@ -94,6 +94,7 @@ public class PanelCrearExamen extends JPanel implements ActionListener{
 		if(this.textoNombreExamen.getText() == null || this.textoNombreExamen.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "¡¡Nombre De El Examen vacio!!!","CUIDADO!!",JOptionPane.WARNING_MESSAGE);
 		}else {
+			
 			noVisible();
 			this.panelPreguntas.visible();
 			this.cantidadPregunta = cantidadPreguntas.getSelectedIndex()+1;

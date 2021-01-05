@@ -3,6 +3,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import interfaz.PanelAdmin;
 
 public class SeleccionAdmin implements ActionListener {
@@ -15,12 +17,15 @@ public class SeleccionAdmin implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == panel.getCrearExamen()) {
-			panel.getPanelCrearExamen().setVisible(true);
-			panel.getPanelEliminarExamen().noVisible();
-			panel.getPanelCrearExamen().visible();
-			panel.getPanelGestionarUsuarios().getTablaUsuarios().getModelo().setRowCount(0);
-			panel.visible();
-			panel.getPanelGestionarUsuarios().getTablaUsuarios().noVisisble();
+			int resp = JOptionPane.showConfirmDialog(panel, "¿ Desea Crear Un Examen ?");
+			if(resp == 0) {
+				panel.getPanelCrearExamen().setVisible(true);
+				panel.getPanelEliminarExamen().noVisible();
+				panel.getPanelCrearExamen().visible();
+				panel.getPanelGestionarUsuarios().getTablaUsuarios().getModelo().setRowCount(0);
+				panel.visible();
+				panel.getPanelGestionarUsuarios().getTablaUsuarios().noVisisble();
+			}
 		}else {
 			if(e.getSource() == panel.getEliminarExamen()) {
 				panel.getPanelEliminarExamen().setVisible(true);

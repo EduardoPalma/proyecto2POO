@@ -3,6 +3,7 @@ package interfaz;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
+
 import javax.swing.*;
 
 import controlador.HacerExamen;
@@ -23,7 +24,7 @@ public class InterfazProyecto extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
-	public InterfazProyecto(Exam datos) throws FileNotFoundException, ClassNotFoundException, SQLException{
+	public InterfazProyecto(Exam datos) throws FileNotFoundException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
 		this.datos = datos;
 		setTitle("Proyecto 2");
 		setSize(600,400);

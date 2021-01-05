@@ -154,6 +154,7 @@ public class PanelPreguntas extends JPanel implements ItemListener,ActionListene
 				this.panel.getPanelAdmin().getDatos().agregarPregunta(p);
 				this.preguntasIngresadas++;
 				this.texto.setText(null);
+				JOptionPane.showMessageDialog(this," ¡¡ Pregunta "+this.preguntasIngresadas+" a sido ingresada !!");
 			}else {
 				if(tipoPreguntas.getSelectedItem().equals("Seleccion Multiple")) {
 					this.datosPreguntSelecMul.cantPreguntas();
@@ -163,12 +164,14 @@ public class PanelPreguntas extends JPanel implements ItemListener,ActionListene
 					this.panel.getPanelAdmin().getDatos().agregarPregunta(p);
 					this.texto.setText(null);
 					this.preguntasIngresadas++;
+					JOptionPane.showMessageDialog(this," ¡¡ Pregunta "+this.preguntasIngresadas+" a sido ingresada !!");
 				}else {
 					if(tipoPreguntas.getSelectedItem().equals("Pregunta Corta")) {
 						Pregunta p = this.datosPregunCorta.pregunta();
 						this.panel.getPanelAdmin().getDatos().agregarPregunta(p);
 						this.preguntasIngresadas++;
 						this.texto.setText(null);
+						JOptionPane.showMessageDialog(this," ¡¡ Pregunta "+this.preguntasIngresadas+" a sido ingresada !!");
 					}
 				}
 			}
